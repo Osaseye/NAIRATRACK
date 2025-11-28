@@ -57,7 +57,7 @@ const LandingPage = () => {
     }, 2500); // Faster animation - every 2.5 seconds
     
     return () => clearInterval(interval);
-  }, [animationStep, actualExpenses]);
+  }, [animationStep, actualExpenses, transactions.length]);
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald/5 to-jade/5">

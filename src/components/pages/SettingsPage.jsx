@@ -32,6 +32,122 @@ import {
   FaFingerprint
 } from 'react-icons/fa';
 
+// ChangePasswordModal component
+const ChangePasswordModal = ({ showChangePassword, setShowChangePassword }) => {
+  if (!showChangePassword) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl p-6 w-full max-w-md">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-bold text-graphite">Change Password</h3>
+          <button 
+            onClick={() => setShowChangePassword(false)}
+            className="p-2 hover:bg-neutral-light-bg rounded-lg transition-colors"
+          >
+            ×
+          </button>
+        </div>
+        
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-graphite mb-2">Current Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-emerald/20 focus:border-emerald transition-colors"
+              placeholder="Enter current password"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-graphite mb-2">New Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-emerald/20 focus:border-emerald transition-colors"
+              placeholder="Enter new password"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-graphite mb-2">Confirm New Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-emerald/20 focus:border-emerald transition-colors"
+              placeholder="Confirm new password"
+            />
+          </div>
+          
+          <div className="flex space-x-3 pt-4">
+            <button
+              onClick={() => setShowChangePassword(false)}
+              className="flex-1 px-4 py-3 border border-neutral-light-grey text-neutral-muted-grey rounded-lg hover:bg-neutral-light-bg transition-colors"
+            >
+              Cancel
+            </button>
+            <button className="flex-1 bg-emerald hover:bg-emerald/90 text-white px-4 py-3 rounded-lg transition-colors">
+              Update Password
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// DeleteAccountModal component
+const DeleteAccountModal = ({ showDeleteAccount, setShowDeleteAccount }) => {
+  if (!showDeleteAccount) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl p-6 w-full max-w-md">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-bold text-red-600">Delete Account</h3>
+          <button 
+            onClick={() => setShowDeleteAccount(false)}
+            className="p-2 hover:bg-neutral-light-bg rounded-lg transition-colors"
+          >
+            ×
+          </button>
+        </div>
+        
+        <div className="space-y-4">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <h4 className="font-semibold text-red-800 mb-2">Warning: This action cannot be undone</h4>
+            <ul className="text-sm text-red-700 space-y-1">
+              <li>• All your financial data will be permanently deleted</li>
+              <li>• Your cards will be deactivated immediately</li>
+              <li>• You will lose access to all saved transactions</li>
+              <li>• Your savings goals and budgets will be removed</li>
+            </ul>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-graphite mb-2">
+              Type "DELETE" to confirm
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-colors"
+              placeholder="Type DELETE here"
+            />
+          </div>
+          
+          <div className="flex space-x-3 pt-4">
+            <button
+              onClick={() => setShowDeleteAccount(false)}
+              className="flex-1 px-4 py-3 border border-neutral-light-grey text-neutral-muted-grey rounded-lg hover:bg-neutral-light-bg transition-colors"
+            >
+              Cancel
+            </button>
+            <button className="flex-1 bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-lg transition-colors">
+              Delete Account
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const SettingsPage = () => {
   const [activeSection, setActiveSection] = useState('profile');
   const [notificationSettings, setNotificationSettings] = useState({
@@ -84,120 +200,6 @@ const SettingsPage = () => {
       ...prev,
       [key]: value !== null ? value : !prev[key]
     }));
-  };
-
-  const ChangePasswordModal = () => {
-    if (!showChangePassword) return null;
-
-    return (
-      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl p-6 w-full max-w-md">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-graphite">Change Password</h3>
-            <button 
-              onClick={() => setShowChangePassword(false)}
-              className="p-2 hover:bg-neutral-light-bg rounded-lg transition-colors"
-            >
-              ×
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Current Password</label>
-              <input
-                type="password"
-                className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-emerald/20 focus:border-emerald transition-colors"
-                placeholder="Enter current password"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-graphite mb-2">New Password</label>
-              <input
-                type="password"
-                className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-emerald/20 focus:border-emerald transition-colors"
-                placeholder="Enter new password"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Confirm New Password</label>
-              <input
-                type="password"
-                className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-emerald/20 focus:border-emerald transition-colors"
-                placeholder="Confirm new password"
-              />
-            </div>
-            
-            <div className="flex space-x-3 pt-4">
-              <button
-                onClick={() => setShowChangePassword(false)}
-                className="flex-1 px-4 py-3 border border-neutral-light-grey text-neutral-muted-grey rounded-lg hover:bg-neutral-light-bg transition-colors"
-              >
-                Cancel
-              </button>
-              <button className="flex-1 bg-emerald hover:bg-emerald/90 text-white px-4 py-3 rounded-lg transition-colors">
-                Update Password
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const DeleteAccountModal = () => {
-    if (!showDeleteAccount) return null;
-
-    return (
-      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl p-6 w-full max-w-md">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-red-600">Delete Account</h3>
-            <button 
-              onClick={() => setShowDeleteAccount(false)}
-              className="p-2 hover:bg-neutral-light-bg rounded-lg transition-colors"
-            >
-              ×
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-              <h4 className="font-semibold text-red-800 mb-2">Warning: This action cannot be undone</h4>
-              <ul className="text-sm text-red-700 space-y-1">
-                <li>• All your financial data will be permanently deleted</li>
-                <li>• Your cards will be deactivated immediately</li>
-                <li>• You will lose access to all saved transactions</li>
-                <li>• Your savings goals and budgets will be removed</li>
-              </ul>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
-                Type "DELETE" to confirm
-              </label>
-              <input
-                type="text"
-                className="w-full px-4 py-3 border border-neutral-light-grey rounded-lg focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-colors"
-                placeholder="Type DELETE here"
-              />
-            </div>
-            
-            <div className="flex space-x-3 pt-4">
-              <button
-                onClick={() => setShowDeleteAccount(false)}
-                className="flex-1 px-4 py-3 border border-neutral-light-grey text-neutral-muted-grey rounded-lg hover:bg-neutral-light-bg transition-colors"
-              >
-                Cancel
-              </button>
-              <button className="flex-1 bg-red-500 hover:bg-red-600 text-white px-4 py-3 rounded-lg transition-colors">
-                Delete Account
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -665,8 +667,14 @@ const SettingsPage = () => {
       </div>
 
       {/* Modals */}
-      <ChangePasswordModal />
-      <DeleteAccountModal />
+      <ChangePasswordModal 
+        showChangePassword={showChangePassword} 
+        setShowChangePassword={setShowChangePassword} 
+      />
+      <DeleteAccountModal 
+        showDeleteAccount={showDeleteAccount} 
+        setShowDeleteAccount={setShowDeleteAccount} 
+      />
     </div>
   );
 };

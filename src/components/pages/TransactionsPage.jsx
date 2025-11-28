@@ -25,7 +25,6 @@ import {
 const TransactionsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
-  const [selectedPeriod, setSelectedPeriod] = useState('all');
 
   // Extended transactions data with Nigerian context
   const allTransactions = [
@@ -51,14 +50,6 @@ const TransactionsPage = () => {
     { name: 'Rent & Bills', value: 'Rent & Bills', color: 'bg-purple-500' },
     { name: 'Entertainment', value: 'Entertainment', color: 'bg-pink-500' },
     { name: 'Income', value: 'income', color: 'bg-emerald' }
-  ];
-
-  const periods = [
-    { name: 'All Time', value: 'all' },
-    { name: 'Today', value: 'today' },
-    { name: 'This Week', value: 'week' },
-    { name: 'This Month', value: 'month' },
-    { name: 'Last 3 Months', value: '3months' }
   ];
 
   const formatCurrency = (amount) => {

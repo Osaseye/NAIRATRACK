@@ -94,7 +94,6 @@ const CreateBudgetModal = ({ showCreateBudget, setShowCreateBudget, budgetCatego
 };
 
 const BudgetsPage = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState('month');
   const [showCreateBudget, setShowCreateBudget] = useState(false);
 
   // Mock budget data with Nigerian context
