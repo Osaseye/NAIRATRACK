@@ -39,6 +39,79 @@ import {
   FaQuestionCircle
 } from 'react-icons/fa';
 
+// Modal Component
+const Modal = ({ isOpen, onClose, title, children }) => {
+  if (!isOpen) return null;
+  
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl p-6 w-full max-w-md max-h-[80vh] overflow-y-auto">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-bold text-graphite">{title}</h3>
+          <button 
+            onClick={onClose}
+            className="p-2 hover:bg-neutral-light-bg rounded-lg transition-colors"
+          >
+            <FaTimes className="text-neutral-muted-grey" />
+          </button>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+// Sidebar Component  
+const Sidebar = ({ sidebarOpen, navigationItems, userData }) => (
+  <div className={`fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+    sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+  }`}>
+    <div className="flex flex-col h-full">
+      {/* Logo */}
+      <div className="flex items-center space-x-3 p-6 border-b border-neutral-light-grey/50">
+        <img src="/icon.png" alt="NairaTrack" className="w-8 h-8" />
+        <span className="text-xl font-bold text-graphite">NairaTrack</span>
+      </div>
+      
+      {/* Navigation */}
+      <nav className="flex-1 py-6">
+        <div className="space-y-2 px-4">
+          {navigationItems.map((item, index) => (
+            <Link
+              key={index}
+              to={item.path}
+              className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-colors ${
+                item.active 
+                  ? 'bg-emerald text-white shadow-lg' 
+                  : 'text-neutral-muted-grey hover:bg-neutral-light-bg hover:text-graphite'
+              }`}
+            >
+              <item.icon className="text-lg" />
+              <span className="font-medium">{item.name}</span>
+            </Link>
+          ))}
+        </div>
+      </nav>
+      
+      {/* User Profile */}
+      <div className="p-4 border-t border-neutral-light-grey/50">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-emerald rounded-full flex items-center justify-center">
+            <FaUser className="text-white" />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-graphite">Adebayo Johnson</p>
+            <p className="text-xs text-neutral-muted-grey">Premium Member</p>
+          </div>
+          <Link to="/settings" className="p-2 hover:bg-neutral-light-bg rounded-lg transition-colors">
+            <FaCog className="text-neutral-muted-grey" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const Dashboard = () => {
   const [showBalance, setShowBalance] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -114,78 +187,6 @@ const Dashboard = () => {
     setActiveModal(null);
   };
 
-  const Modal = ({ isOpen, onClose, title, children }) => {
-    if (!isOpen) return null;
-    
-    return (
-      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl p-6 w-full max-w-md max-h-[80vh] overflow-y-auto">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-bold text-graphite">{title}</h3>
-            <button 
-              onClick={onClose}
-              className="p-2 hover:bg-neutral-light-bg rounded-lg transition-colors"
-            >
-              <FaTimes className="text-neutral-muted-grey" />
-            </button>
-          </div>
-          {children}
-        </div>
-      </div>
-    );
-  };
-
-  // Sidebar Component
-  const Sidebar = () => (
-    <div className={`fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
-      sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-    }`}>
-      <div className="flex flex-col h-full">
-        {/* Logo */}
-        <div className="flex items-center space-x-3 p-6 border-b border-neutral-light-grey/50">
-          <img src="/icon.png" alt="NairaTrack" className="w-8 h-8" />
-          <span className="text-xl font-bold text-graphite">NairaTrack</span>
-        </div>
-        
-        {/* Navigation */}
-        <nav className="flex-1 py-6">
-          <div className="space-y-2 px-4">
-            {navigationItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-colors ${
-                  item.active 
-                    ? 'bg-emerald text-white shadow-lg' 
-                    : 'text-neutral-muted-grey hover:bg-neutral-light-bg hover:text-graphite'
-                }`}
-              >
-                <item.icon className="text-lg" />
-                <span className="font-medium">{item.name}</span>
-              </Link>
-            ))}
-          </div>
-        </nav>
-        
-        {/* User Profile */}
-        <div className="p-4 border-t border-neutral-light-grey/50">
-          <div className="flex items-center space-x-3 p-3 rounded-xl hover:bg-neutral-light-bg transition-colors cursor-pointer">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald to-jade rounded-full flex items-center justify-center">
-              <FaUser className="text-white" />
-            </div>
-            <div className="flex-1">
-              <p className="font-semibold text-graphite">{userData.firstName} {userData.lastName}</p>
-              <p className="text-xs text-neutral-muted-grey">{userData.level}</p>
-            </div>
-            <FaSignOutAlt className="text-neutral-muted-grey hover:text-graphite transition-colors" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -229,7 +230,7 @@ const Dashboard = () => {
       )}
       
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar sidebarOpen={sidebarOpen} navigationItems={navigationItems} userData={userData} />
       
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-0 lg:ml-0">
@@ -314,33 +315,27 @@ const Dashboard = () => {
 
                 {/* Quick Actions */}
                 <div className="flex flex-wrap gap-2 lg:gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="small"
+                  <button 
                     onClick={() => openModal('addMoney')}
-                    className="bg-white/20 border-white/30 text-white hover:bg-white/30 flex items-center justify-center space-x-2 px-3 py-2"
+                    className="bg-white/20 border border-white/30 text-white hover:bg-white/30 flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors"
                   >
                     <FaPlus className="text-sm" />
-                    <span>Add Money</span>
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="small"
+                    <span className="text-sm font-medium">Add Money</span>
+                  </button>
+                  <button 
                     onClick={() => openModal('send')}
-                    className="bg-white/20 border-white/30 text-white hover:bg-white/30 flex items-center justify-center space-x-2 px-3 py-2"
+                    className="bg-white/20 border border-white/30 text-white hover:bg-white/30 flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors"
                   >
                     <FaArrowUp className="text-sm" />
-                    <span>Send</span>
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="small"
+                    <span className="text-sm font-medium">Send</span>
+                  </button>
+                  <button 
                     onClick={() => openModal('invest')}
-                    className="bg-white/20 border-white/30 text-white hover:bg-white/30 flex items-center justify-center space-x-2 px-3 py-2"
+                    className="bg-white/20 border border-white/30 text-white hover:bg-white/30 flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors"
                   >
                     <FaChartPie className="text-sm" />
-                    <span>Invest</span>
-                  </Button>
+                    <span className="text-sm font-medium">Invest</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -521,14 +516,13 @@ const Dashboard = () => {
                   <h3 className="text-lg font-bold mb-1">Track an Expense</h3>
                   <p className="text-white/80 text-sm">Keep your streak going! Add today's expenses</p>
                 </div>
-                <Button 
-                  variant="outline"
+                <button 
                   onClick={() => openModal('addTransaction')}
-                  className="bg-white/20 border-white/30 text-white hover:bg-white/30 flex items-center justify-center space-x-2 px-4 py-2"
+                  className="bg-white/20 border border-white/30 text-white hover:bg-white/30 flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors"
                 >
-                  <FaPlus />
-                  <span>Add Transaction</span>
-                </Button>
+                  <FaPlus className="text-sm" />
+                  <span className="text-sm font-medium">Add Transaction</span>
+                </button>
               </div>
             </div>
           </div>
@@ -542,14 +536,14 @@ const Dashboard = () => {
         <div className="space-y-4">
           <p className="text-neutral-muted-grey">Choose how you'd like to add money to your account:</p>
           <div className="space-y-3">
-            <Button fullWidth className="flex items-center justify-center space-x-2">
-              <FaCreditCard />
-              <span>Bank Transfer</span>
-            </Button>
-            <Button fullWidth variant="outline" className="flex items-center justify-center space-x-2">
-              <FaPhone />
-              <span>USSD Code</span>
-            </Button>
+            <button className="w-full bg-emerald hover:bg-emerald/90 text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaCreditCard className="text-sm" />
+              <span className="font-medium">Bank Transfer</span>
+            </button>
+            <button className="w-full border border-emerald text-emerald hover:bg-emerald hover:text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaPhone className="text-sm" />
+              <span className="font-medium">USSD Code</span>
+            </button>
           </div>
         </div>
       </Modal>
@@ -558,14 +552,14 @@ const Dashboard = () => {
         <div className="space-y-4">
           <p className="text-neutral-muted-grey">Send money to friends and family:</p>
           <div className="space-y-3">
-            <Button fullWidth className="flex items-center justify-center space-x-2">
-              <FaUser />
-              <span>Send to Contact</span>
-            </Button>
-            <Button fullWidth variant="outline" className="flex items-center justify-center space-x-2">
-              <FaPhone />
-              <span>Send to Phone Number</span>
-            </Button>
+            <button className="w-full bg-emerald hover:bg-emerald/90 text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaUser className="text-sm" />
+              <span className="font-medium">Send to Contact</span>
+            </button>
+            <button className="w-full border border-emerald text-emerald hover:bg-emerald hover:text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaPhone className="text-sm" />
+              <span className="font-medium">Send to Phone Number</span>
+            </button>
           </div>
         </div>
       </Modal>
@@ -574,14 +568,14 @@ const Dashboard = () => {
         <div className="space-y-4">
           <p className="text-neutral-muted-grey">Start your investment journey:</p>
           <div className="space-y-3">
-            <Button fullWidth className="flex items-center justify-center space-x-2">
-              <FaChartLine />
-              <span>Mutual Funds</span>
-            </Button>
-            <Button fullWidth variant="outline" className="flex items-center justify-center space-x-2">
-              <FaPiggyBank />
-              <span>Fixed Savings</span>
-            </Button>
+            <button className="w-full bg-emerald hover:bg-emerald/90 text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaChartLine className="text-sm" />
+              <span className="font-medium">Mutual Funds</span>
+            </button>
+            <button className="w-full border border-emerald text-emerald hover:bg-emerald hover:text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaPiggyBank className="text-sm" />
+              <span className="font-medium">Fixed Savings</span>
+            </button>
           </div>
         </div>
       </Modal>
@@ -590,14 +584,14 @@ const Dashboard = () => {
         <div className="space-y-4">
           <p className="text-neutral-muted-grey">Record a new expense or income:</p>
           <div className="space-y-3">
-            <Button fullWidth className="flex items-center justify-center space-x-2">
-              <FaArrowDown />
-              <span>Add Expense</span>
-            </Button>
-            <Button fullWidth variant="outline" className="flex items-center justify-center space-x-2">
-              <FaArrowUp />
-              <span>Add Income</span>
-            </Button>
+            <button className="w-full bg-emerald hover:bg-emerald/90 text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaArrowDown className="text-sm" />
+              <span className="font-medium">Add Expense</span>
+            </button>
+            <button className="w-full border border-emerald text-emerald hover:bg-emerald hover:text-white flex items-center justify-center space-x-2 px-4 py-3 rounded-lg transition-colors">
+              <FaArrowUp className="text-sm" />
+              <span className="font-medium">Add Income</span>
+            </button>
           </div>
         </div>
       </Modal>
