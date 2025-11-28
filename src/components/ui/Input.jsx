@@ -19,11 +19,11 @@ const Input = ({
   } ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`;
 
   return (
-    <div className=\"space-y-2\">
+    <div className="space-y-2">
       {label && (
-        <label className=\"block text-label text-graphite font-medium\">
+        <label className="block text-label text-graphite font-medium">
           {label}
-          {required && <span className=\"text-error ml-1\">*</span>}
+          {required && <span className="text-error ml-1">*</span>}
         </label>
       )}
       <input
@@ -36,7 +36,7 @@ const Input = ({
         {...props}
       />
       {error && (
-        <p className=\"text-error text-sm mt-1\">{error}</p>
+        <p className="text-error text-sm mt-1">{error}</p>
       )}
     </div>
   );

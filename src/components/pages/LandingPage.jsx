@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
 import { 
   FaDollarSign, 
@@ -71,11 +72,15 @@ const LandingPage = () => {
           <div className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-graphite hover:text-emerald transition-colors">Features</a>
             <a href="#about" className="text-graphite hover:text-emerald transition-colors">About</a>
-            <Button variant="secondary" size="small">Sign In</Button>
+            <Link to="/login">
+              <Button variant="secondary" size="small">Sign In</Button>
+            </Link>
           </div>
           {/* Mobile Navigation */}
           <div className="md:hidden">
-            <Button variant="primary" size="small">Join</Button>
+            <Link to="/signup">
+              <Button variant="primary" size="small">Join</Button>
+            </Link>
           </div>
         </nav>
       </header>
@@ -94,15 +99,11 @@ const LandingPage = () => {
                 The smartest way for Nigerians to track expenses, manage budgets, and achieve financial freedom.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button variant="primary" size="lg" className="w-full sm:w-auto px-8 py-4 text-lg">
-                  Start Free Today
-                </Button>
-                {/* Hide Watch Demo on mobile */}
-                <div className="hidden sm:block">
-                  <Button variant="ghost" size="lg" className="px-8 py-4 text-lg">
-                    Watch Demo →
+                <Link to="/signup">
+                  <Button variant="primary" size="lg" className="w-full sm:w-auto px-8 py-4 text-lg">
+                    Start Free Today
                   </Button>
-                </div>
+                </Link>
               </div>
               <div className="flex items-center justify-center lg:justify-start mt-8 space-x-4 text-sm text-neutral-muted-grey">
                 <span className="flex items-center">
@@ -313,12 +314,16 @@ const LandingPage = () => {
             Start your journey to financial freedom today. No hidden fees, no complicated setup.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button variant="secondary" size="lg" className="bg-white text-emerald hover:bg-gray-50 px-8 py-4 text-lg font-semibold">
-              Get Started Free
-            </Button>
-            <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white/10 px-8 py-4 text-lg">
-              Learn More
-            </Button>
+            <Link to="/signup">
+              <Button variant="secondary" size="lg" className="bg-white text-emerald hover:bg-gray-50 px-8 py-4 text-lg font-semibold">
+                Get Started Free
+              </Button>
+            </Link>
+            <a href="#features">
+              <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white/10 px-8 py-4 text-lg">
+                Learn More
+              </Button>
+            </a>
           </div>
           
           {/* Trust Indicators */}
