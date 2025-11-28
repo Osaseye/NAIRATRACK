@@ -1,24 +1,23 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import LandingPage from './components/pages/LandingPage';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState('landing');
+
+  const renderPage = () => {
+    switch(currentPage) {
+      case 'landing':
+        return <LandingPage />;
+      default:
+        return <LandingPage />;
+    }
+  };
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="min-h-screen bg-background">
+      {renderPage()}
+    </div>
+  );
 }
 
-export default App
+export default App;

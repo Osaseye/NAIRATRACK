@@ -1,3 +1,129 @@
-﻿@tailwind base;
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-neutral-off-white text-graphite font-primary;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-light-grey;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-muted-grey rounded-full;
+  }
+}
+
+@layer components {
+  /* Button Components */
+  .btn-primary {
+    @apply bg-jade text-white font-medium py-3 px-6 rounded-button hover:bg-jade-hover transition-colors duration-200 active:scale-95 transform;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-emerald text-emerald font-medium py-3 px-6 rounded-button hover:bg-emerald hover:text-white transition-all duration-200;
+  }
+  
+  .btn-ghost {
+    @apply text-emerald font-medium py-3 px-6 rounded-button hover:bg-emerald/10 transition-colors duration-200;
+  }
+
+  /* Card Components */
+  .card {
+    @apply bg-background-card rounded-card shadow-card p-6;
+  }
+  
+  .card-emerald-header {
+    @apply bg-background-card rounded-card shadow-card overflow-hidden;
+  }
+  
+  .card-emerald-header::before {
+    content: '';
+    @apply block h-1 bg-emerald;
+  }
+
+  /* Input Components */
+  .input-field {
+    @apply w-full px-4 py-3 bg-white border border-neutral-light-grey rounded-button focus:outline-none focus:ring-2 focus:ring-jade focus:border-transparent transition-all duration-200;
+  }
+  
+  .input-error {
+    @apply border-error focus:ring-error;
+  }
+
+  /* Modal Components */
+  .modal-overlay {
+    @apply fixed inset-0 bg-emerald/80 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+  }
+  
+  .modal-content {
+    @apply bg-white rounded-card shadow-modal w-full max-w-md animate-slide-up;
+  }
+
+  /* Currency Display */
+  .currency {
+    @apply font-secondary font-semibold;
+  }
+  
+  .currency-large {
+    @apply font-secondary font-bold text-screen-title;
+  }
+
+  /* Progress Components */
+  .progress-ring {
+    @apply relative w-24 h-24;
+  }
+  
+  .progress-bar {
+    @apply w-full bg-neutral-light-grey rounded-full overflow-hidden;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-gradient-to-r from-emerald to-jade transition-all duration-300;
+  }
+
+  /* Status Indicators */
+  .status-success {
+    @apply text-success bg-success/10 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .status-warning {
+    @apply text-warning bg-warning/10 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .status-error {
+    @apply text-error bg-error/10 px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  /* Navigation */
+  .bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-light-grey px-2 py-3 z-40;
+  }
+  
+  .nav-item {
+    @apply flex flex-col items-center justify-center py-2 px-3 rounded-button transition-colors duration-200;
+  }
+  
+  .nav-item-active {
+    @apply text-jade bg-jade/10;
+  }
+  
+  .nav-item-inactive {
+    @apply text-neutral-muted-grey hover:text-emerald;
+  }
+}
