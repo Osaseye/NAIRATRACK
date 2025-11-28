@@ -4,6 +4,7 @@ import LandingPage from './components/pages/LandingPage';
 import LoginPage from './components/pages/LoginPage';
 import SignUpPage from './components/pages/SignUpPage';
 import OTPPage from './components/pages/OTPPage';
+import Dashboard from './components/pages/Dashboard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/verify" element={<OTPPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </Router>

@@ -45,8 +45,7 @@ const LoginPage = () => {
       setTimeout(() => {
         console.log('Login attempt:', formData);
         setIsLoading(false);
-        // TODO: Add actual authentication logic
-        // navigate('/dashboard'); // Will add dashboard later
+        navigate('/dashboard');
       }, 2000);
     } else {
       setIsLoading(false);
